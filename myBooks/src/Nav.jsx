@@ -7,10 +7,8 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 
 import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {Button, Link, TextField} from "@mui/material";
@@ -41,7 +39,7 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Nav({isFave}) {
-    const {setBooks,startIndex,setQuery,favourites} = useContext(UserContext);
+    const {setBooks,startIndex,setQuery,favourites,query} = useContext(UserContext);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =    useState(null);
@@ -53,9 +51,7 @@ export default function Nav({isFave}) {
     useEffect(()=>{
         console.log({isFave})
     },[isFave])
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -68,6 +64,7 @@ export default function Nav({isFave}) {
 
     const handleSearch = (e) =>{
         setSearch(e.target.value)
+        setQuery(e.target.value)
     }
     const searchBooks = (e) => {
 
@@ -75,14 +72,18 @@ export default function Nav({isFave}) {
 
         async function getData(){
             let url = new URL(BASE_URL);
-            url.searchParams.set('q', search);
+            url.searchParams.set('q', search||query);
             url.searchParams.set('startIndex', startIndex);
             setQuery(search)
+            try {
+                let axiosResponse = await axios.get(url);
+                const data = axiosResponse.data?.items
+                console.log(data)
+                setBooks(data)
+            }catch (e){
 
-            let axiosResponse = await axios.get(url);
-            const data = axiosResponse.data?.items
-            console.log(data)
-            setBooks(data)
+            }
+
         }
 
         getData()
@@ -131,18 +132,7 @@ export default function Nav({isFave}) {
         >
 
 
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
+
         </Menu>
     );
 
@@ -188,17 +178,7 @@ export default function Nav({isFave}) {
                             </Badge>
                         </IconButton>
 
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton

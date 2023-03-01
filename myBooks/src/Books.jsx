@@ -11,17 +11,22 @@ const Books = () => {
     useEffect(()=>{
         async function getData(){
 
-            if(startIndex>=0){
-                let url = new URL(BASE_URL);
-                url.searchParams.set('q', query);
-                url.searchParams.set('startIndex', startIndex);
-                setQuery(query)
+            try {
+                if(startIndex>=0 && query!==""){
+                    let url = new URL(BASE_URL);
+                    url.searchParams.set('q', query);
+                    url.searchParams.set('startIndex', startIndex);
+                    setQuery(query)
 
-                let axiosResponse = await axios.get(url);
-                const data = axiosResponse.data?.items
-                console.log(data)
-                setBooks(data)
+                    let axiosResponse = await axios.get(url);
+                    const data = axiosResponse.data?.items
+                    console.log(data)
+                    setBooks(data)
+                }
+            }catch (e){
+
             }
+
 
 
         }
