@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from "react-router-dom";
@@ -11,11 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import {UserContext} from "./App.jsx";
 
 const Book = ({id,info}) => {
-    const {books,startIndex,setStartIndex,query,setQuery,setBooks,setFavourites,favourites} = React.useContext(UserContext);
+    const {setFavourites,favourites} = useContext(UserContext);
     const [isFave, setIsFave] = useState(false);
 
     const navigate = useNavigate();
 
+    useEffect(()=>{
+        let exists = favourites?.includes(id);
+        setIsFave(exists)
+    },[favourites])
     return (
         <Card>
 
@@ -50,13 +53,12 @@ const Book = ({id,info}) => {
                     console.log({id})
                     let exists = favourites?.includes(id);
 
-                    console.log({exists})
-                    setIsFave((curr)=>{
-                        return !curr
-                    })
+
+
+
                     if(!exists){
 
-                        setFavourites((curr)=>{
+                        setFavourites(()=>{
 
                             return [...new Set([...favourites,id])]
                         })

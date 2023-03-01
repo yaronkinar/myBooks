@@ -1,22 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {BASE_URL, UserContext} from "./App.jsx";
 import Book from "./Book.jsx";
-import {Button, Grid, Paper} from "@mui/material";
-import {styled} from "@mui/material/styles";
+
 import axios from "axios";
 import Nav from "./Nav"
 
 const Fav = () => {
-    const {startIndex,setStartIndex,query,setQuery,setBooks,favourites} = React.useContext(UserContext);
+    const {favourites} = useContext(UserContext);
     const [myFav, setMyFav] = useState([]);
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
+
     useEffect(()=>{
         async function getData(){
            let endpoints = favourites.map((favourites)=>{
@@ -30,7 +23,7 @@ const Fav = () => {
                         return data.data
                     });
                     setMyFav(map)
-                    console.log(map)
+
                 })
             );
 
