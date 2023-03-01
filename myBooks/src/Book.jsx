@@ -35,9 +35,9 @@ const Book = ({id,info}) => {
                     {info.description}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    <Typography>
+
                         published Date:
-                    </Typography>
+
                     {info.publishedDate}
                 </Typography>
             </CardContent>

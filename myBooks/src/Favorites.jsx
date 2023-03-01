@@ -10,6 +10,7 @@ const Fav = () => {
     const [myFav, setMyFav] = useState([]);
 
 
+
     useEffect(()=>{
         async function getData(){
            let endpoints = favourites.map((favourites)=>{
