@@ -8,18 +8,11 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import Login from "./Login.jsx";
+import {Home} from "./Home.jsx";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Login/>,
-    },{
-        path: "/home",
-        element: <div>Hello world!</div>,
-    },
-]);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <App/>
   </React.StrictMode>,
 )

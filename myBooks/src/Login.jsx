@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useContext,useState} from 'react';
 import {Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography} from "@mui/material";
+import {UserContext} from "./App";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
+
+    const {user,setUser} = useContext(UserContext)
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -9,6 +14,13 @@ const Login = () => {
             email: data.get("email"),
             password: data.get("password"),
         });
+        setUser(
+             data.get("email")
+        )
+        navigate("/Home");
+
+        // window.history.replace('/Home');
+
     };
     return (
         <div>
