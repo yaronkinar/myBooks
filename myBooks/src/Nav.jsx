@@ -63,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar(isFav) {
+export default function PrimarySearchAppBar({isFave}) {
     const {books,setBooks,user,setUser,setStartIndex,startIndex,query,setQuery,favourites} = useContext(UserContext);
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -107,7 +107,6 @@ export default function PrimarySearchAppBar(isFav) {
         }
 
         getData()
-      console.log(search)
     }
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -177,16 +176,17 @@ export default function PrimarySearchAppBar(isFav) {
                     </Link>
 
 
-                    {isFav &&  "FAV PAFE"}
+                    {isFave &&  "sfsf"}
 
                     <Search>
-                        <SearchIconWrapper>
+                      {/*  <SearchIconWrapper>
                             <SearchIcon />
-                        </SearchIconWrapper>
+                        </SearchIconWrapper>*/}
                         <TextField
                             value={search}
                             onChange={handleSearch}
                             hiddenLabel
+                            placeholder="Search"
                             id="filled-hidden-label-small"
 
                             variant="filled"

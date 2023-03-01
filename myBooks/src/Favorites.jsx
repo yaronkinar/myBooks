@@ -59,6 +59,7 @@ const Fav = () => {
 
                     )
                 })}
+                {!myFav.length && (<div> Nothing to see here</div>)}
             </div>
         </>
 

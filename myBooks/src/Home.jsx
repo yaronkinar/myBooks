@@ -10,7 +10,7 @@ export const Home = () => {
 
     return (
         <>
-        <Nav/>
+        <Nav isFave={false}/>
             <Books/>
 
         </>

@@ -35,7 +35,7 @@ const Books = () => {
         <>
             {books.length > 0 && (
 
-                <>
+                <div className="buttons">
                     <Button variant="contained" onClick={(e)=>{
                         setStartIndex((curr)=>{
                             if(curr==0){
@@ -51,7 +51,7 @@ const Books = () => {
                         })
                         console.log(query)
                     }}>Next</Button>
-                </>
+                </div>
             )}
 
             <div className="grid">

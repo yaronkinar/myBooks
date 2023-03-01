@@ -20,9 +20,7 @@ const Book = ({id,info}) => {
         <Card>
 
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                   id: {id}
-                </Typography>
+
                 <Typography gutterBottom variant="h5" component="div">
                    title: {info.title}
                 </Typography>
@@ -34,7 +32,9 @@ const Book = ({id,info}) => {
                     {info.description}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    published Date:
+                    <Typography>
+                        published Date:
+                    </Typography>
                     {info.publishedDate}
                 </Typography>
             </CardContent>
@@ -61,10 +61,7 @@ const Book = ({id,info}) => {
                             return [...new Set([...favourites,id])]
                         })
                     }else {
-                      /*  let filter1 = favourites?.filter(function(obj ) {
-                            return obj != id
-                        });*/
-                      //  setIsFave(false)
+
                         const set = new Set(favourites);
                         set.delete(id)
 
