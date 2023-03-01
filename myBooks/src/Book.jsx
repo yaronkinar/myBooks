@@ -45,7 +45,7 @@ const Book = ({id,info}) => {
                 }
                 }>
 
-                    Learn More</Button>
+                    Show More</Button>
                 <IconButton onClick={()=>{
                     console.log({id})
                     let exists = favourites?.includes(id);
